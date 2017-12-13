@@ -1,0 +1,14 @@
+{% extends "modi.html" %}
+{% block results %}
+<div class="row justify-content-center">
+  <div class="col-6 result-parent">
+    {% if success %}
+    <h1>Result: Face found</h1>
+    <img src="{{ url_for('static' , filename='image')}}/{{ filename }}" alt="Image" class="result img-responsive">
+    {% else %}
+    <h1>NO Face detected</h1>
+    <img src="{{ url_for('static' , filename='image')}}/{{ filename }}" alt="Image" class="result img-responsive">
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
