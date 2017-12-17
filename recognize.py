@@ -7,3 +7,9 @@ def Recognize(img):
     resized_image = np.array(resized_image)
     x = resized_image.reshape(1,100,100,1)
     print model.predict(x)
+    if model.predict(x)[0][1]:
+        return "Narendra Modi"
+    elif model.predict(x)[0][0]:
+        return "Arvind Kejriwal"
+    else:
+        return None

@@ -13,12 +13,7 @@ def facealign(img):                # for i in range(images_total_extracted+1):
             right_eye = [eye_pair[0]]
             left_eye = [eye_pair[1]]
             im = Normalize(im,(left_eye[0][0],left_eye[0][1]),(right_eye[0][0],right_eye[0][1]))
-            face_cascade = cv2.CascadeClassifier('/home/prakhar/Desktop/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
-            faces = face_cascade.detectMultiScale(im, 1.3, 5)
-            if faces!=():
-                for (x,y,w,h) in faces:
-                    detected_face = im[y:y+h, x:x+w]
             # im.save(os.path.join(folder_images,str(i)+".jpg"), "JPEG")
     except:
         pass
-    return detected_face
+    return img
