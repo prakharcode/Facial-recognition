@@ -29,7 +29,7 @@ imageData = []
 imageLabels = []
 
 for fl in DatasetPath:
-    imgRead = io.imread(fl, as_grey=True)
+    imgRead = cv2.imread(fl, 0)#as_grey=True)
     imageData.append(imgRead)
     if os.path.split(fl)[1].split(".")[0].startswith("kejriwal"):
         labelRead = 0 # Parse class label from file
@@ -40,8 +40,7 @@ for fl in DatasetPath:
 #train_test_split of data
 X = np.array(imageData)
 y = np.array(imageLabels)
-X_train, X_test, y_train, y_test = train_test_split(X, y,
-    train_size=0.6, random_state = 20)
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.6, random_state = 20)
 # Total no of labels for sanity check
 nb_labels = len(np.unique(y))
 print 'Number of unique classes ', nb_labels
@@ -78,12 +77,11 @@ def conv_3x3_2fc_500(size):
     model.add(MaxPooling2D((3, 3), strides=(2, 2), name='block4_pool'))
 
     model.add(Flatten())
-    model.add(Dense(500, activation='relu', kernel_initializer=init, name='fc1'))
+    model.add(Dense(500, activation='relu', name='fc1'))
     model.add(Dropout(rate=0.5))
-    model.add(Dense(500, activation='relu', kernel_initializer=init, name='fc2'))
+    model.add(Dense(250, activation='relu', name='fc2'))
     model.add(Dropout(rate=0.5))
     model.add(Dense(2, activation='softmax', name='predictions'))
-
     optim = Adam(lr=0.0005, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 
     model.compile(loss='sparse_categorical_crossentropy', optimizer=optim, metrics=['accuracy'])
@@ -93,8 +91,7 @@ model = conv_3x3_2fc_500(size=100)
 model.summary()
 
 loss_history = History()
-model.fit(X_train, y_train, batch_size=64, nb_epoch=100,
-          verbose=1, validation_data=(X_test, y_test),
+model.fit(X_train, y_train, batch_size=64, nb_epoch=50, validation_split=0.2 ,verbose=1, validation_data=(X_test, y_test),
           callbacks=[loss_history])
-filepath='facedetect.h5'
+filepath='newmodel7.h5'
 model.save(filepath)
