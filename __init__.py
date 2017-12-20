@@ -20,6 +20,9 @@ def index():
             img_color = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
             img = cv2.imdecode(nparr, 0)
             face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+            # filename = secure_filename(f.filename)
+            # f.save(os.path.join(app.config['IMAGE_DIR'], filename))
+            # img = cv2.imread(url_for(filename),0)
             faces = face_cascade.detectMultiScale(img, 1.3, 5)
             result = []
             if faces!=():
@@ -36,7 +39,7 @@ def index():
                 input_image = "data:%sbase64,%s" % (mime, encoded)
                 return render_template('result.html', success=True, input_image=input_image, face_detected=result[0], face_detected_length=len(result))
             else:
-                return render_template('result.html', success=False)
+                return render_template('result.html', success=False, input_image=input_image)
         except:
             pass
     return render_template('modi.html')
