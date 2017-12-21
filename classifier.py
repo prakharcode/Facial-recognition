@@ -38,9 +38,9 @@ for fl in DatasetPath:
     imageLabels.append(labelRead)
 
 #train_test_split of data
-X = np.array(imageData)
+X = np.array(imageData)-np.mean(imageData)
 y = np.array(imageLabels)
-X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.6, random_state = 20)
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state = 20)
 # Total no of labels for sanity check
 nb_labels = len(np.unique(y))
 print 'Number of unique classes ', nb_labels
@@ -93,5 +93,5 @@ model.summary()
 loss_history = History()
 model.fit(X_train, y_train, batch_size=64, nb_epoch=50, validation_split=0.2 ,verbose=1, validation_data=(X_test, y_test),
           callbacks=[loss_history])
-filepath='newmodel7.h5'
+filepath='b.h5'
 model.save(filepath)

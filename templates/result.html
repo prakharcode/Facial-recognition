@@ -5,6 +5,7 @@
     {% if success %}
     <h1>Result: Face found</h1>
     <img src="{{ input_image }}" name="inputImage" type ="text" class="result img-responsive">
+    <img src="{{ url_for('static',filename='image') }}/{{ filename }}" name="inputImage" type ="text" class="result img-responsive">
     {% if face_detected_length==2 %}
     <h1 class="text-center">BOTH</h1>
     {% else %}
@@ -13,6 +14,7 @@
     {% else %}
     <h1>NO Face detected</h1>
   <img src="{{ input_image }}" name="inputImage" type ="text" class="result img-responsive">
+  <img src="{{ url_for('static',filename='image')}}/{{ filename }} " name="inputImage" type ="text" class="result img-responsive">
    {% endif %}
   </div>
 </div>
