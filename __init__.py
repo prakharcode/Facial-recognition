@@ -5,7 +5,6 @@ import os,cv2
 import numpy as np
 import base64
 from recognize import Recognize
-from facealign import facealign
 app = Flask(__name__)
 app.config.from_object(Configuration)
 @app.route('/',methods = ['GET','POST'])
