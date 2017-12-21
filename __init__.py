@@ -41,11 +41,11 @@ def index():
             mime = "image/jpg"
             mime = mime + ";"
             input_image = "data:%sbase64,%s" % (mime, encoded)
-            cv2.imwrite(os.path.join(app.config['IMAGE_DIR'], filename),img_color)
-            return render_template('result.html', success=True, face_detected=result[0], face_detected_length=len(result), filename=filename) #input_image=input_image
+            # cv2.imwrite(os.path.join(app.config['IMAGE_DIR'], filename),img_color)
+            return render_template('result.html', success=True, face_detected=result[0], face_detected_length=len(result), input_image=input_image) #
 
         else:
-            return render_template('result.html', success=False, filename=filename) #input_image=input_image
+            return render_template('result.html', success=False, input_image=input_image) #input_image=input_image
     return render_template('modi.html')
 
 
