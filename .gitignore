@@ -1,6 +1,5 @@
 venv
 images
-dataset
 *.pyc
 newmodel5.h5
 newmodel6.h5
